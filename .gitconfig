@@ -1,0 +1,7 @@
+[user]
+	name = Guilherme Guerra
+	email = guerrinha@comum.org
+[color]
+	ui = auto
+[push]
+        default = current
