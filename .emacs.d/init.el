@@ -75,6 +75,11 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/web-mode")
 (require 'web-mode)
 
+;; Zencoding
+(require 'zencoding-mode)
+(add-hook 'web-mode-hook 'zencoding-mode)
+
+
 (defun web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
