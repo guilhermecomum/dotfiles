@@ -16,7 +16,7 @@ set $mod Mod4
 #exec guake
 exec gnome-settings-daemon
 exec gnome-session
-
+exec xcompmgr
 
 #Make windows floating
 for_window [class="Gmrun"] floating enable
