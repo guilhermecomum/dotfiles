@@ -75,11 +75,6 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/web-mode")
 (require 'web-mode)
 
-;; Zencoding
-(require 'zencoding-mode)
-(add-hook 'web-mode-hook 'zencoding-mode)
-
-
 (defun web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
@@ -90,6 +85,14 @@
 (add-hook 'web-mode-hook 'web-mode-hook)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; Zencoding
+(require 'zencoding-mode)
+(add-hook 'web-mode-hook 'zencoding-mode)
+
+(eval-after-load zencoding-mode
+  (progn
+    (define-key zencoding-mode-keymap (kbd "C-j") nil)))
 
 ;;-------- Interface --------
 
