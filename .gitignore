@@ -1,3 +1,10 @@
 *~
-.emacs.d/elpa/archives/
+*.elc
+.DS_Store
+.emacs.d/url/
 .emacs.d/auto-save-list/
+.emacs.d/ac-comphist.dat
+.emacs.d/tramp
+.emacs.d/eshell
+.emacs.d/elpa/archives/
+.emacs.d/session.*
