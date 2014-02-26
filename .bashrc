@@ -3,7 +3,7 @@
 # for examples
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+#[ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -105,10 +105,6 @@ export PERL_MAILERS="sendmail:/usr/bin/msmtp"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/bin
-
-# Android SDK
-export PATH=${PATH}:~/.local/share/applications/android-sdk-linux/tools
-export PATH=${PATH}:~/.local/share/applications/android-sdk-linux/platform-tools
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
