@@ -94,6 +94,14 @@
   (progn
     (define-key zencoding-mode-keymap (kbd "C-j") nil)))
 
+;; Mac specific stuff
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'alt)
+  (setq mac-command-modifier 'meta)
+  ;; sets fn-delete to be right-delete
+  (global-set-key [kp-delete] 'delete-char)
+  (menu-bar-mode 1))
+
 ;;-------- Interface --------
 
 ;; no bars
