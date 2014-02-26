@@ -55,6 +55,14 @@
    "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
+;; Mac specific stuff
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'alt)
+  (setq mac-command-modifier 'meta)
+  ;; sets fn-delete to be right-delete
+  (global-set-key [kp-delete] 'delete-char)
+  (menu-bar-mode 1))
+
 ;;-------- Modes --------
 
 ;; Css
@@ -94,13 +102,8 @@
   (progn
     (define-key zencoding-mode-keymap (kbd "C-j") nil)))
 
-;; Mac specific stuff
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier 'alt)
-  (setq mac-command-modifier 'meta)
-  ;; sets fn-delete to be right-delete
-  (global-set-key [kp-delete] 'delete-char)
-  (menu-bar-mode 1))
+;; Editorconfig
+(load "editorconfig")
 
 ;;-------- Interface --------
 
@@ -108,9 +111,6 @@
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
-
-;; Font face/size
-(set-default-font "Inconsolata-8")
 
 ;; setting up a color theme
 (add-to-list 'load-path "~/.emacs.d/elisp/color-theme")
