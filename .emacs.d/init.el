@@ -105,6 +105,9 @@
 ;; Editorconfig
 (load "editorconfig")
 
+;; Slim-mode
+(require 'slim-mode)
+
 ;;-------- Interface --------
 
 ;; no bars
