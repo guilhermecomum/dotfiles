@@ -158,8 +158,8 @@
 (global-set-key [(ctrl x) (w)] 'delete-trailing-whitespace)
 
 ;; buffer
-(global-set-key [s-tab] 'next-buffer)
-(global-set-key [S-s-iso-lefttab] 'previous-buffer)
+(global-set-key [A-tab] 'next-buffer)
+(global-set-key [S-A-iso-lefttab] 'previous-buffer)
 
 ;; Navegation
 (global-set-key (kbd "s-g") 'goto-line)
