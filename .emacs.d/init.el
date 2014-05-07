@@ -117,11 +117,14 @@
 (tool-bar-mode 0)
 
 ;; setting up a color theme
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme")
-(require 'color-theme)
-(load-file
-"~/.emacs.d/elisp/color-theme/themes/color-theme-comum/color-theme-comum.el")
-(color-theme-comum)
+(require 'monokai-theme)
+
+;; setting up a color theme
+;; (add-to-list 'load-path "~/.emacs.d/elisp/color-theme")
+;; (require 'color-theme)
+;; (load-file
+;; "~/.emacs.d/elisp/color-theme/themes/color-theme-comum/color-theme-comum.el")
+;; (color-theme-comum)
 
 ;; show line numbers
 (require 'linum)
