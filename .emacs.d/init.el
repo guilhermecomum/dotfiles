@@ -178,3 +178,19 @@
 ;; Remove whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (put 'downcase-region 'disabled nil)
+
+;; CSS color values colored by themselves
+;; http://news.ycombinator.com/item?id=873541
+(defvar hexcolor-keywords
+  '(("#[abcdef[:digit:]]+"
+     (0 (put-text-property
+         (match-beginning 0)
+         (match-end 0)
+         'face (list :foreground (match-string-no-properties 0)))))))
+
+(defun hexcolor-add-to-font-lock ()
+  (font-lock-add-keywords nil hexcolor-keywords))
+
+(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
+(add-hook 'sass-mode-hook 'hexcolor-add-to-font-lock)
+(add-hook 'less-css-mode-hook 'hexcolor-add-to-font-lock)
