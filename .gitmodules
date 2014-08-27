@@ -1,9 +1,0 @@
-[submodule ".emacs.d/elisp/color-theme/themes/color-theme-comum"]
-	path = .emacs.d/elisp/color-theme/themes/color-theme-comum
-	url = https://github.com/comumorg/color-theme-comum.git
-[submodule ".emacs.d/elisp/web-mode"]
-	path = .emacs.d/elisp/web-mode
-	url = https://github.com/fxbois/web-mode.git
-[submodule ".emacs.d/elisp/arduino-mode"]
-	path = .emacs.d/elisp/arduino-mode
-	url = https://github.com/bookest/arduino-mode.git

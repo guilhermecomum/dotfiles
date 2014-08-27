@@ -1,4 +1,5 @@
-(add-to-list 'load-path "~/.emacs.d/elisp")
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 
 ;;------- Enviroment ---------
 
@@ -45,16 +46,6 @@
   (revert-buffer t t)
   (message "This buffer was refreshed due to external changes"))
 
-;; Adding marmalade as a repo to the package module
-(require 'package)
-(add-to-list
- 'package-archives
- '("marmalade" .
-   "http://marmalade-repo.org/packages/")
- '("melpa" .
-   "http://melpa.milkbox.net/packages/"))
-(package-initialize)
-
 ;; Mac specific stuff
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'alt)
@@ -63,13 +54,17 @@
   (global-set-key [kp-delete] 'delete-char)
   (menu-bar-mode 1))
 
+;; Neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
 ;;-------- Modes --------
 
 ;; Css
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level 4)
 
-;; sass and haml mode
+;; Sass
 (require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
@@ -77,10 +72,8 @@
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-(add-hook 'markdown-mode-hook '(lambda() (flyspell-mode)))
 
 ;; Web Mode
-(add-to-list 'load-path "~/.emacs.d/elisp/web-mode")
 (require 'web-mode)
 
 (defun web-mode-hook ()
@@ -103,9 +96,6 @@
   (progn
     (define-key zencoding-mode-keymap (kbd "C-j") nil)))
 
-;; Editorconfig
-(load "editorconfig")
-
 ;; Slim-mode
 (require 'slim-mode)
 
@@ -118,13 +108,6 @@
 
 ;; setting up a color theme
 (require 'monokai-theme)
-
-;; setting up a color theme
-;; (add-to-list 'load-path "~/.emacs.d/elisp/color-theme")
-;; (require 'color-theme)
-;; (load-file
-;; "~/.emacs.d/elisp/color-theme/themes/color-theme-comum/color-theme-comum.el")
-;; (color-theme-comum)
 
 ;; show line numbers
 (require 'linum)
@@ -178,19 +161,3 @@
 ;; Remove whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (put 'downcase-region 'disabled nil)
-
-;; CSS color values colored by themselves
-;; http://news.ycombinator.com/item?id=873541
-(defvar hexcolor-keywords
-  '(("#[abcdef[:digit:]]+"
-     (0 (put-text-property
-         (match-beginning 0)
-         (match-end 0)
-         'face (list :foreground (match-string-no-properties 0)))))))
-
-(defun hexcolor-add-to-font-lock ()
-  (font-lock-add-keywords nil hexcolor-keywords))
-
-(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
-(add-hook 'sass-mode-hook 'hexcolor-add-to-font-lock)
-(add-hook 'less-css-mode-hook 'hexcolor-add-to-font-lock)
