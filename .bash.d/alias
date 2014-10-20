@@ -1,0 +1,6 @@
+# -*- Mode: shell-script; -*-
+
+alias ls='ls -G'
+alias emacsc='open -a /opt/boxen/homebrew/Cellar/emacs/HEAD/Emacs.app $1'
+alias edit="emacsclient -t"
+alias rlf='cd $HOME/Projects/RentLocalFriend/rlf_rails/'
