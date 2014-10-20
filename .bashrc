@@ -87,9 +87,11 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.bash.d/alias ]; then
+    . ~/.bash.d/alias
 fi
+
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -111,3 +113,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Boxen
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
+### Rent a Local Friend
+export rlf="/Users/guerrinha/Projects/RentLocalFriend/rlf_rails/"
