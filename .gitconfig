@@ -8,6 +8,7 @@
 [alias]
         lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
         sync = !git pull && git push
+        undo-commit = reset --soft HEAD^
 
 [credential]
 helper = /opt/boxen/bin/boxen-git-credential
