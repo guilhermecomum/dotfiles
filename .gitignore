@@ -6,5 +6,8 @@
 .emacs.d/ac-comphist.dat
 .emacs.d/tramp
 .emacs.d/eshell
-.emacs.d/elpa/archives/
 .emacs.d/session.*
+.emacs.d/.cask
+.emacs.d/elisp
+.emacs.d/elpa
+.emacs.d/.mc-lists.el
