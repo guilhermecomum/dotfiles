@@ -5,7 +5,7 @@
 ;;------- Enviroment ---------
 
 (column-number-mode)
-(setq fill-column 59)
+(setq fill-column 80)
 (setq-default fill-column 72)
 
 ;; There's no place like home
@@ -120,6 +120,12 @@
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq-default js2-basic-offset 2)
+
+;; Projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
 
 ;;-------- Interface --------
 

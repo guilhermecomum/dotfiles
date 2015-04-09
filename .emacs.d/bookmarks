@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("rlf_rails"
+ (filename . "~/Projects/RentLocalFriend/rlf_rails/")
+ (front-context-string . ".git\n  -rw-r--r-")
+ (rear-context-string . "10 Mar 30 17:49 ")
+ (position . 271))
+)
