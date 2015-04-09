@@ -65,9 +65,10 @@ xterm*|rxvt*)
     ;;
 esac
 
-
 alias ls='ls -G'
-alias rlf="/Users/guerrinha/Projects/RentLocalFriend/rlf_rails/"
+
+### Go to Rent a Local Friend
+alias rlf="cd /Users/guerrinha/Projects/RentLocalFriend/rlf_rails/"
 
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
 
