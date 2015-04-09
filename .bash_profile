@@ -7,4 +7,5 @@ fi
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
