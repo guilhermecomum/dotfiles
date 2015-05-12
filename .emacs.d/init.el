@@ -1,6 +1,11 @@
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(load "~/.emacs.d/mu4e.el")
+
 (require 'cask "~/.cask/cask.el")
+
 (cask-initialize)
 (exec-path-from-shell-initialize)
+(guru-global-mode +1)
 
 ;;------- Enviroment ---------
 
@@ -38,18 +43,9 @@
 ;; spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; show trailing whitespace
-(setq show-trailing-whitespace t)
-
-;; Reloading the buffer instead of pissing me off with "what should I
-;; do" questions
-(defun ask-user-about-supersession-threat (filename)
-  (revert-buffer t t)
-  (message "This buffer was refreshed due to external changes"))
-
 ;; Mac specific stuff
 (when (eq system-type 'darwin)
-  (setq mac-option-modifier 'alt)
+  (setq mac-option-modifier nil)
   (setq mac-command-modifier 'meta)
   ;; sets fn-delete to be right-delete
   (global-set-key [kp-delete] 'delete-char)
@@ -70,9 +66,6 @@
 
 (global-set-key (kbd "<f5>") 'fd-switch-dictionary)
 (global-set-key (kbd "<f6>") 'ispell-word)
-
-;; Disable Undo tree
-(setq undo-true-mode nil)
 
 ;;-------- Modes --------
 
@@ -121,6 +114,10 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq-default js2-basic-offset 2)
 
+;; Pomodoro
+(require 'pomodoro)
+(pomodoro-add-to-mode-line)
+
 ;; Projectile
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
@@ -137,10 +134,12 @@
 ;; setting up a color theme
 (load-theme 'monokai t)
 
-
 ;; show line numbers
 (require 'linum)
 (global-linum-mode 1)
+
+;; hightlight currentline
+(hl-line-mode)
 
 ;; Always do syntax highlighting
 (global-font-lock-mode 1)
@@ -154,6 +153,7 @@
 
 ;; respecting boundaries
 (require 'fill-column-indicator)
+(fci-mode)
 (setq fci-rule-width 1)
 (setq fci-rule-color "#333333")
 
@@ -164,8 +164,8 @@
 (nyan-mode)
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(90 50))
-(add-to-list 'default-frame-alist '(alpha 90 50))
+;; (set-frame-parameter (selected-frame) 'alpha '(100 50))
+;; (add-to-list 'default-frame-alist '(alpha 100 50))
 
 ;;-------- Keybinds --------
 (require 'bind-key)
@@ -181,8 +181,8 @@
 (global-set-key [(ctrl x) (w)] 'delete-trailing-whitespace)
 
 ;; buffer
-(global-set-key [A-tab] 'next-buffer)
-(global-set-key [S-A-tab] 'previous-buffer)
+(global-set-key (kbd "M-]") 'next-buffer)
+(global-set-key (kbd "M-[") 'previous-buffer)
 
 ;; Navegation
 (global-set-key (kbd "M-g") 'goto-line)
@@ -210,79 +210,22 @@
 (global-set-key [(meta j)] '(lambda () (interactive) (scroll-other-window 1)))
 (global-set-key [(meta k)] '(lambda () (interactive) (scroll-other-window -1)))
 
-;;-------- Hooks ----------
+;; Fiplr
+(bind-key (kbd "C-c f") 'fiplr-find-file)
+(setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "script"))))
+
+;; Projectile
+;; (bind-key (kbd "C-c C-f") 'projectile-find-file)
+(bind-key (kbd "C-c C-a") 'helm-projectile-ack)
+
+;; Rinari
+(bind-key (kbd "C-c m") 'rinari-find-model)
+(bind-key (kbd "C-c l") 'rinari-find-controller)
+(bind-key (kbd "C-c v") 'rinari-find-view)
+(bind-key (kbd "C-c k") 'rinari-console)
+
+;;-------- HOOKS ----------
 
 ;; Remove whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
- '(compilation-message-face (quote default))
- '(custom-safe-themes
-   (quote
-    ("bd115791a5ac6058164193164fd1245ac9dc97207783eae036f0bfc9ad9670e0" "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" default)))
- '(doc-view-continuous t)
- '(fci-rule-color "#49483E")
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
- '(highlight-tail-colors
-   (quote
-    (("#49483E" . 0)
-     ("#67930F" . 20)
-     ("#349B8D" . 30)
-     ("#21889B" . 50)
-     ("#968B26" . 60)
-     ("#A45E0A" . 70)
-     ("#A41F99" . 85)
-     ("#49483E" . 100))))
- '(magit-diff-use-overlays nil)
- '(syslog-debug-face
-   (quote
-    ((t :background unspecified :foreground "#A1EFE4" :weight bold))))
- '(syslog-error-face
-   (quote
-    ((t :background unspecified :foreground "#F92672" :weight bold))))
- '(syslog-hour-face (quote ((t :background unspecified :foreground "#A6E22E"))))
- '(syslog-info-face
-   (quote
-    ((t :background unspecified :foreground "#66D9EF" :weight bold))))
- '(syslog-ip-face (quote ((t :background unspecified :foreground "#E6DB74"))))
- '(syslog-su-face (quote ((t :background unspecified :foreground "#FD5FF0"))))
- '(syslog-warn-face
-   (quote
-    ((t :background unspecified :foreground "#FD971F" :weight bold))))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#F92672")
-     (40 . "#CF4F1F")
-     (60 . "#C26C0F")
-     (80 . "#E6DB74")
-     (100 . "#AB8C00")
-     (120 . "#A18F00")
-     (140 . "#989200")
-     (160 . "#8E9500")
-     (180 . "#A6E22E")
-     (200 . "#729A1E")
-     (220 . "#609C3C")
-     (240 . "#4E9D5B")
-     (260 . "#3C9F79")
-     (280 . "#A1EFE4")
-     (300 . "#299BA6")
-     (320 . "#2896B5")
-     (340 . "#2790C3")
-     (360 . "#66D9EF"))))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   (quote
-    (unspecified "#272822" "#49483E" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

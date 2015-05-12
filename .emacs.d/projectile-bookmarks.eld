@@ -1,1 +1,1 @@
-("~/Projects/RentLocalFriend/rlf_rails/" "~/Projects/dotfiles/")
+("~/Projects/dotfiles/" "~/Projects/RentLocalFriend/rlf_rails/" "/usr/local/")

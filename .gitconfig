@@ -15,6 +15,7 @@ helper = /opt/boxen/bin/boxen-git-credential
 
 [core]
 excludesfile = /opt/boxen/config/git/gitignore
+	editor = emacsclient -t
 
 [hub]
 protocol = https
