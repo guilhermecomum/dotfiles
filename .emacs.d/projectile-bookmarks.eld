@@ -1,1 +1,1 @@
-("~/Projects/dotfiles/" "~/Projects/RentLocalFriend/rlf_rails/" "/usr/local/")
+("~/Projects/dotfiles/.emacs.d/" "~/Projects/RentLocalFriend/rlf_rails/" "~/Projects/dotfiles/" "/usr/local/")
