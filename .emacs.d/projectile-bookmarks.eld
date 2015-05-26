@@ -1,1 +1,1 @@
-("~/Projects/dotfiles/.emacs.d/" "~/Projects/RentLocalFriend/rlf_rails/" "~/Projects/dotfiles/" "/usr/local/")
+("~/Projects/RentLocalFriend/rlf_rails/" "~/Projects/dotfiles/.emacs.d/" "~/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/foundation-rails-5.4.5.0/" "~/Projects/dotfiles/" "/usr/local/")

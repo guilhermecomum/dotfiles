@@ -60,7 +60,6 @@
   (menu-bar-mode 1))
 
 ;; Neotree
-(require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
 ;; Flyspell
@@ -87,57 +86,33 @@
 (load-theme 'monokai t)
 
 ;; show line numbers
-(require 'linum)
 (global-linum-mode 0)
 (global-set-key (kbd "C-c C-n") 'linum-mode)
 
 ;; hightlight currentline
-(hl-line-mode)
+(hl-line-mode t)
 
 ;; Always do syntax highlighting
 (global-font-lock-mode 1)
 
-;; Also highlight parens
-(setq show-paren-delay 0 show-paren-style 'parenthesis)
-(show-paren-mode 1)
-(smartparens-global-mode t)
-
-;;
-(require 'corral)
-(global-set-key (kbd "M-9") 'corral-parentheses-backward)
-(global-set-key (kbd "M-0") 'corral-parentheses-forward)
-(global-set-key (kbd "M-{") 'corral-braces-backward)
-(global-set-key (kbd "M-}") 'corral-braces-forward)
-(global-set-key (kbd "M-\"") 'corral-double-quotes-backward)
-
 ;; highlight mark region
 (transient-mark-mode 1)
-
-;; respecting boundaries
-(require 'fill-column-indicator)
-(fci-mode)
-(setq fci-rule-width 1)
-(setq fci-rule-color "#333333")
 
 ;; scroll smoothly
 (setq scroll-conservatively 10000)
 
-;; Nyan-mode
-(nyan-mode t)
 
 ;; Transparency
 ;; (set-frame-parameter (selected-frame) 'alpha '(100 50))
 ;; (add-to-list 'default-frame-alist '(alpha 100 50))
 
 ;;-------- Modes --------
-(global-aggressive-indent-mode 1)
 
 ;; Css
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level 4)
 
 ;; Sass
-(require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 
@@ -148,8 +123,6 @@
 (add-hook 'markdown-mode-hook '(lambda() (flyspell-mode)))
 
 ;; Web Mode
-(require 'web-mode)
-
 (defun web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
@@ -162,32 +135,11 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig?\\'" . web-mode))
 
-;; Zencoding
-(require 'zencoding-mode)
-(add-hook 'web-mode-hook 'zencoding-mode)
-
-(eval-after-load zencoding-mode
-  (progn
-    (define-key zencoding-mode-keymap (kbd "C-j") nil)))
-
-;; Slim-mode
-(require 'slim-mode)
-
 ;; Javascript
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(setq js2-consistent-level-indent-inner-bracket-p 1)
-(setq js2-pretty-multiline-decl-indentation-p 1)
-(setq js2-bounce-indent-p t)
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
-(setq js2-highlight-level 3)
-(add-hook 'js-mode-hook 'my-paredit-nonlisp)
-
-;; Pomodoro
-(require 'pomodoro)
-(pomodoro-add-to-mode-line)
+(setq js-indent-level 2)
 
 ;; Projectile
 (projectile-global-mode)
@@ -195,8 +147,6 @@
 (helm-projectile-on)
 
 ;; auto-complete
-(require 'auto-complete)
-(require 'auto-complete-config)
 (setq ac-ignore-case nil)
 (setq ac-dwim 2)
 (ac-config-default)
@@ -204,11 +154,7 @@
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 
-
-
-
 ;;-------- Keybinds --------
-(require 'bind-key)
 
 ;; change window
 (global-set-key [C-tab] 'other-window)
@@ -230,9 +176,6 @@
 ;; Sort
 (global-set-key (kbd "C-c s") 'sort-lines)
 
-;; Cool Enter
-(bind-key "C-j" 'newline-and-indent)
-
 ;; Multiple Cursors
 (global-set-key (kbd "C-c C-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -251,7 +194,7 @@
 (global-set-key [(meta k)] '(lambda () (interactive) (scroll-other-window -1)))
 
 ;; Fiplr
-(bind-key (kbd "C-c f") 'fiplr-find-file)
+(bind-key (kbd "C-c C-f") 'fiplr-find-file)
 (setq fiplr-ignored-globs '((directories (".git" ".svn"))
                             (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "script"))))
 
@@ -271,17 +214,6 @@
 ;; Remove whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Enabling the server mode by default
-(server-mode)
-
-
-(defun my-paredit-nonlisp ()
-  "Turn on paredit mode for non-lisps."
-  (interactive)
-  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
-       '((lambda (endp delimiter) nil)))
-  (paredit-mode 1))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -296,3 +228,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Nyan-mode
+(nyan-mode t)
