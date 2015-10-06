@@ -69,6 +69,7 @@ alias ls='ls -G'
 
 ### Go to Rent a Local Friend
 alias rlf="cd /Users/guerrinha/Projects/RentLocalFriend/rlf_rails/"
+alias parafas="cd /Users/guerrinha/Projects/www/parafas/wp-content/themes/parafernalias/"
 alias brake="bundle exec rake"
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
 
@@ -77,3 +78,4 @@ PATH=$PATH:$HOME/bin
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+source /usr/local/etc/bash_completion.d/password-store

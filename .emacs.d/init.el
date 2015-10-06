@@ -1,16 +1,13 @@
 (require 'cask "~/.cask/cask.el")
-
 (cask-initialize)
+
 (require 'pallet)
 (pallet-mode t)
 (exec-path-from-shell-initialize)
 (guru-global-mode +1)
 
-(load "~/.emacs.d/mu4e.el")
 (load "~/.emacs.d/ruby.el")
 (load "~/.emacs.d/prodigy.el")
-(load "~/.emacs.d/slack.el")
-
 
 ;;------- Enviroment ---------
 
@@ -18,14 +15,15 @@
 (setq fill-column 80)
 (setq-default fill-column 72)
 
-;; Notifications
-(add-to-list 'erc-modules 'notifications)
-
 ;; There's no place like home
 (setq default-directory "~/")
 
 ;; ssh and local sudo/su
 (require 'tramp)
+
+;; Vagrant tramp
+(eval-after-load 'tramp
+  '(vagrant-tramp-enable))
 
 ;; splash screen
 (setq inhibit-splash-screen t)
@@ -110,7 +108,7 @@
 
 ;; Css
 (setq cssm-indent-function #'cssm-c-style-indenter)
-(setq cssm-indent-level 4)
+(setq cssm-indent-level 2)
 
 ;; Sass
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
@@ -141,10 +139,17 @@
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 (setq js-indent-level 2)
 
+;; disable json-jsonlist checking for json files
+;;(setq-default flycheck-disabled-checkers
+;;  (append flycheck-disabled-checkers
+;;    '(json-jsonlist)))
+
 ;; Projectile
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+(setq grep-find-ignored-files '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "script"))))
 
 ;; auto-complete
 (setq ac-ignore-case nil)
@@ -194,17 +199,17 @@
 (global-set-key [(meta k)] '(lambda () (interactive) (scroll-other-window -1)))
 
 ;; Fiplr
-(bind-key (kbd "C-c C-f") 'fiplr-find-file)
+(global-set-key (kbd "C-c f") 'fiplr-find-file)
 (setq fiplr-ignored-globs '((directories (".git" ".svn"))
                             (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "script"))))
 
 ;; Projectile
 ;; (bind-key (kbd "C-c C-f") 'projectile-find-file)
-(bind-key (kbd "C-c C-a") 'helm-projectile-ack)
+(bind-key (kbd "C-c C-a") 'helm-projectile-pt)
 
 ;; Rinari
 (bind-key (kbd "C-c m") 'rinari-find-model)
-(bind-key (kbd "C-c l") 'rinari-find-controller)
+(bind-key (kbd "C-c t") 'rinari-find-controller)
 (bind-key (kbd "C-c v") 'rinari-find-view)
 (bind-key (kbd "C-c k") 'rinari-console)
 
