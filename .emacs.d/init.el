@@ -1,3 +1,9 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 (exec-path-from-shell-initialize)
@@ -33,7 +39,7 @@
 (setq x-select-enable-clipboard t)
 
 ;; disable backup files
-;; (setq make-backup-files nil)
+(setq make-backup-files nil)
 
 ;; spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -48,15 +54,16 @@
   (message "This buffer was refreshed due to external changes"))
 
 ;; Mac specific stuff
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier 'alt)
-  (setq mac-command-modifier 'meta)
-  ;; sets fn-delete to be right-delete
-  (global-set-key [kp-delete] 'delete-char)
-  (menu-bar-mode 1))
+;;(when (eq system-type 'darwin)
+;;  (setq mac-option-modifier 'alt)
+;;  (setq mac-command-modifier 'meta)
+;;  ;; sets fn-delete to be right-delete
+;;  (global-set-key [kp-delete] 'delete-char)
+;;  (menu-bar-mode 1))
 
 ;; Neotree
 (require 'neotree)
+
 (global-set-key [f8] 'neotree-toggle)
 
 ;; Flyspell
@@ -78,12 +85,13 @@
 
 ;; Css
 (setq cssm-indent-function #'cssm-c-style-indenter)
-(setq cssm-indent-level 4)
+(setq cssm-indent-level 2)
+(setq css-indent-offset 2)
 
 ;; Sass
 (require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
-(add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
+(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
@@ -121,7 +129,26 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq-default js2-basic-offset 2)
 
+;;Tritum
+(add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
+(setq js-indent-level 2)
+
+;; Projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+;; (setq projectile-globally-ignored-files '((directories (".git" ".svn")
+;;                                (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "*.json" "script" "*.http"))))
+
+;; auto-complete
+;;(setq ac-ignore-case nil)
+;;(setq ac-dwim 2)
+;;(ac-config-default)
+;;(define-key ac-complete-mode-map "\C-n" 'ac-next)
+;;(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+
 ;;-------- Interface --------
+(set-frame-font "DejaVu Sans Mono-10")
 
 ;; no bars
 (scroll-bar-mode 0)
@@ -130,7 +157,6 @@
 
 ;; setting up a color theme
 (load-theme 'monokai t)
-
 
 ;; show line numbers
 (require 'linum)
@@ -157,9 +183,14 @@
 ;; Nyan-mode
 (nyan-mode)
 
+;; Rainbow mode
+(rainbow-delimiters-mode)
+(add-hook 'js-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'scss-mode-hook #'rainbow-delimiters-mode)
+
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(90 50))
-(add-to-list 'default-frame-alist '(alpha 90 50))
+;;(set-frame-parameter (selected-frame) 'alpha '(90 90))
+;;(add-to-list 'default-frame-alist '(alpha 90 90))
 
 ;;-------- Keybinds --------
 (require 'bind-key)
@@ -175,8 +206,9 @@
 (global-set-key [(ctrl x) (w)] 'delete-trailing-whitespace)
 
 ;; buffer
-(global-set-key [A-tab] 'next-buffer)
-(global-set-key [S-A-tab] 'previous-buffer)
+(global-set-key [s-tab] 'next-buffer)
+(global-set-key [S-s-iso-lefttab] 'previous-buffer)
+
 
 ;; Navegation
 (global-set-key (kbd "M-g") 'goto-line)
@@ -204,6 +236,14 @@
 (global-set-key [(meta j)] '(lambda () (interactive) (scroll-other-window 1)))
 (global-set-key [(meta k)] '(lambda () (interactive) (scroll-other-window -1)))
 
+;; Fiplr
+(global-set-key (kbd "C-c f") 'fiplr-find-file)
+(setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "script"))))
+
+;; Projectile
+;; (bind-key (kbd "C-c C-f") 'projectile-find-file)
+(bind-key (kbd "C-c C-a") 'helm-projectile-ack)
 ;;-------- Hooks ----------
 
 ;; Remove whitespace before save
@@ -234,6 +274,9 @@
      ("#A41F99" . 85)
      ("#49483E" . 100))))
  '(magit-diff-use-overlays nil)
+ '(package-selected-packages
+   (quote
+    (helm-ag ac-helm ac-inf-ruby ac-js2 auto-complete color-theme enh-ruby-mode fiplr go-mode guru-mode handlebars-mode helm-projectile helm-ag helm-spotify json-mode mu4e-maildirs-extension pomodoro pt rainbow-mode rinari toml-mode twittering-mode vagrant-tramp rainbow-delimiters zencoding-mode yasnippet yaml-mode web-mode use-package smex smartparens slim-mode scss-mode sass-mode projectile project-explorer prodigy popwin pallet nyan-mode neotree multiple-cursors monokai-theme molokai-theme markdown-mode magit latex-preview-pane js2-mode idle-highlight-mode htmlize highlight-indentation flymake-sass flycheck-cask fill-column-indicator expand-region exec-path-from-shell evil drag-stuff base16-theme)))
  '(syslog-debug-face
    (quote
     ((t :background unspecified :foreground "#A1EFE4" :weight bold))))
