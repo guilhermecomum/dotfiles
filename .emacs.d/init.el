@@ -81,6 +81,9 @@
 ;; Disable Undo tree
 (setq undo-true-mode nil)
 
+(require 'autopair)
+(autopair-global-mode)
+
 ;;-------- Modes --------
 
 ;; Css
@@ -102,11 +105,11 @@
 (require 'web-mode)
 
 (defun web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  (setq web-mode-css-indent-offset 4)
-  (setq web-mode-code-indent-offset 4))
+ "Hooks for Web mode."
+ (setq web-mode-markup-indent-offset 2)
+ (setq web-mode-indent-style 2)
+ (setq web-mode-css-indent-offset 4)
+ (setq web-mode-code-indent-offset 4))
 
 (add-hook 'web-mode-hook 'web-mode-hook)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
@@ -126,8 +129,9 @@
 
 ;; Javascript
 (autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (setq-default js2-basic-offset 2)
+(setq web-mode-comment-style 2)
 
 ;;Tritum
 (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
@@ -137,8 +141,15 @@
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-;; (setq projectile-globally-ignored-files '((directories (".git" ".svn")
-;;                                (files ("*.jpg" "*.png" "*.zip" "*~" "public/*" "tmp/*" "vendor" "bin" "docs" "log" "*.json" "script" "*.http"))))
+(setq grep-find-ignored-files '("*.json" "*.http"))
+(setq projectile-globally-ignored-files '(".git" ".svn" "tmp" "*.json" "*.http"))
+
+
+
+;; Twitter
+(require 'twittering-mode)
+(setq twittering-use-master-password t)
+(setq twittering-cert-file "/etc/ssl/certs/ca-certificates.crt")
 
 ;; auto-complete
 ;;(setq ac-ignore-case nil)
@@ -148,8 +159,8 @@
 ;;(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 ;;-------- Interface --------
-(set-frame-font "DejaVu Sans Mono-10")
-
+(set-frame-font "Menlo:pixelsize=14")
+;;(set-frame-font "DejaVu Sans Mono-10")
 ;; no bars
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
@@ -219,6 +230,9 @@
 ;; Cool Enter
 (bind-key "C-j" 'newline-and-indent)
 
+;; List buffers
+(bind-key "C-x b" 'helm-buffers-list)
+
 ;; Multiple Cursors
 (global-set-key (kbd "C-c C-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -247,79 +261,4 @@
 ;;-------- Hooks ----------
 
 ;; Remove whitespace before save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
- '(compilation-message-face (quote default))
- '(custom-safe-themes
-   (quote
-    ("bd115791a5ac6058164193164fd1245ac9dc97207783eae036f0bfc9ad9670e0" "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" default)))
- '(doc-view-continuous t)
- '(fci-rule-color "#49483E")
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
- '(highlight-tail-colors
-   (quote
-    (("#49483E" . 0)
-     ("#67930F" . 20)
-     ("#349B8D" . 30)
-     ("#21889B" . 50)
-     ("#968B26" . 60)
-     ("#A45E0A" . 70)
-     ("#A41F99" . 85)
-     ("#49483E" . 100))))
- '(magit-diff-use-overlays nil)
- '(package-selected-packages
-   (quote
-    (helm-ag ac-helm ac-inf-ruby ac-js2 auto-complete color-theme enh-ruby-mode fiplr go-mode guru-mode handlebars-mode helm-projectile helm-ag helm-spotify json-mode mu4e-maildirs-extension pomodoro pt rainbow-mode rinari toml-mode twittering-mode vagrant-tramp rainbow-delimiters zencoding-mode yasnippet yaml-mode web-mode use-package smex smartparens slim-mode scss-mode sass-mode projectile project-explorer prodigy popwin pallet nyan-mode neotree multiple-cursors monokai-theme molokai-theme markdown-mode magit latex-preview-pane js2-mode idle-highlight-mode htmlize highlight-indentation flymake-sass flycheck-cask fill-column-indicator expand-region exec-path-from-shell evil drag-stuff base16-theme)))
- '(syslog-debug-face
-   (quote
-    ((t :background unspecified :foreground "#A1EFE4" :weight bold))))
- '(syslog-error-face
-   (quote
-    ((t :background unspecified :foreground "#F92672" :weight bold))))
- '(syslog-hour-face (quote ((t :background unspecified :foreground "#A6E22E"))))
- '(syslog-info-face
-   (quote
-    ((t :background unspecified :foreground "#66D9EF" :weight bold))))
- '(syslog-ip-face (quote ((t :background unspecified :foreground "#E6DB74"))))
- '(syslog-su-face (quote ((t :background unspecified :foreground "#FD5FF0"))))
- '(syslog-warn-face
-   (quote
-    ((t :background unspecified :foreground "#FD971F" :weight bold))))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#F92672")
-     (40 . "#CF4F1F")
-     (60 . "#C26C0F")
-     (80 . "#E6DB74")
-     (100 . "#AB8C00")
-     (120 . "#A18F00")
-     (140 . "#989200")
-     (160 . "#8E9500")
-     (180 . "#A6E22E")
-     (200 . "#729A1E")
-     (220 . "#609C3C")
-     (240 . "#4E9D5B")
-     (260 . "#3C9F79")
-     (280 . "#A1EFE4")
-     (300 . "#299BA6")
-     (320 . "#2896B5")
-     (340 . "#2790C3")
-     (360 . "#66D9EF"))))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   (quote
-    (unspecified "#272822" "#49483E" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
