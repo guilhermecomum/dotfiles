@@ -1,19 +1,30 @@
 [user]
-	name = Guilherme Guerra
-	email = guerrinha@comum.org
+  name = Guilherme Guerra
+  email = guerrinha@comum.org
 [color]
-	ui = auto
+  ui = auto
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red reverse bold
 [push]
-        default = current
+  default = current
 [alias]
-        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-        sync = !git pull && git push
-
-[credential]
-helper = /opt/boxen/bin/boxen-git-credential
-
-[core]
-excludesfile = /opt/boxen/config/git/gitignore
-
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  sync = !git pull && git push
+  up = add -up
+  undo-commit = reset --soft HEAD^
 [hub]
-protocol = https
+  protocol = https
