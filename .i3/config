@@ -1,9 +1,7 @@
 set $mod Mod4
 
 # Autostart
-exec gnome-settings-daemon
-exec gnome-session
-exec xcompmgr
+exec mate-session
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
