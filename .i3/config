@@ -2,6 +2,7 @@ set $mod Mod4
 
 # Autostart
 exec mate-session
+exec guake
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
@@ -10,11 +11,14 @@ for_window [title="gcolor2"] floating enable
 # Font
 font pango:Roboto 10
 
-# Colors
+#Remove window title
+for_window [class="^.*"] border pixel 1
 
+# Colors
 # class                 border  backgr. text    indicator
-client.focused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
-client.urgent           #e74c3c #e74c3c #ffffff #900000
+client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
+client.urgent           #e74c3c #e74c3c #ffffff #90000
+client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
