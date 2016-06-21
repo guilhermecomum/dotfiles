@@ -48,14 +48,9 @@ end=$'\e[0m'
 # Since the venv name written in PS1 by the virtualenv's postactivate
 # script won't have colors, the original customized value is saved in
 # the variable `ORIG_PS1` and re-exported in the postactivate script.
-export ORIG_PS1="\[$red\]♥ \[$blu\]\W \[$yel\](\$(__git_ps1 \"%s\"))\[$grn\] $ \[$end\]"
+export ORIG_PS1="\[$red\]♥ \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
 export PS1=$ORIG_PS1
 
-# # Since the venv name written in PS1 by the virtualenv's postactivate
-# # script won't have colors, the original customized value is saved in
-# # the variable `ORIG_PS1` and re-exported in the postactivate script.
-# export ORIG_PS1='\w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
-# export PS1=$ORIG_PS1
 
 # Extend path with reasonable directories
 PATH="$HOME/bin:$PATH"
