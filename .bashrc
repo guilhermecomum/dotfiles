@@ -48,7 +48,7 @@ end=$'\e[0m'
 # Since the venv name written in PS1 by the virtualenv's postactivate
 # script won't have colors, the original customized value is saved in
 # the variable `ORIG_PS1` and re-exported in the postactivate script.
-export ORIG_PS1="\[$red\]♥ \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
+export ORIG_PS1="\[$red\] ♥ \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
 export PS1=$ORIG_PS1
 
 
@@ -63,3 +63,4 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 
 # Load programming framework specific settings
 . $HOME/.bash.d/lang/nodejs
+. $HOME/.bash.d/lang/ruby
