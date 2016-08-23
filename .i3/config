@@ -1,18 +1,20 @@
 set $mod Mod4
 
 # Autostart
+exec nitrogen
 exec mate-session
 exec guake
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
 for_window [title="gcolor2"] floating enable
+for_window [instance="guake"] floating enable
 
 # Font
 font pango:Roboto 10
 
 #Remove window title
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
 
 # Colors
 # class                 border  backgr. text    indicator
@@ -30,7 +32,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start gmrun (a program launcher)
-bindsym $mod+d exec gmrun
+bindsym $mod+space exec gmrun
 
 # change focus
 bindsym $mod+j focus left
@@ -74,7 +76,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
