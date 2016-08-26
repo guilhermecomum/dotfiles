@@ -1,9 +1,9 @@
 set $mod Mod4
 
 # Autostart
-exec nitrogen --restore
 exec mate-session
 exec guake
+exec nitrogen --restore
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
