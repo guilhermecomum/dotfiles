@@ -3,3 +3,7 @@
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -l'
 alias edit="emacsclient -t"
+
+#OMS
+alias oms='cd $HOME/Projects/OMS/OEOMS/oms/oms_ui/src/main/ui'
+alias omsf='npm run clean-cache && npm run update-schema && npm run package && npm run serve'
