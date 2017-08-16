@@ -135,7 +135,7 @@ bindsym $mod+r mode "resize"
 
 bar {
     status_command i3status
-    font pango:Roboto 9
+    font pango:Roboto Bold 9
 
     colors {
         background #2c3e50
