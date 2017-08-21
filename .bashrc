@@ -64,3 +64,8 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 # Load programming framework specific settings
 . $HOME/.bash.d/lang/nodejs
 . $HOME/.bash.d/lang/ruby
+
+# Instalacao das Funcoes ZZ (www.funcoeszz.net)
+export ZZOFF=""  # desligue funcoes indesejadas
+export ZZPATH="/usr/bin/funcoeszz"  # script
+source "$ZZPATH"
