@@ -1,17 +1,21 @@
 set $mod Mod4
 
-# Autostart
-exec mate-session
+# Autostar
 exec guake
-exec nitrogen --restore
+exec ~/bin/unsplash.sh
+#exec nitrogen --restore
+#exec mplayer -loop 0 -rootwin -ao null -noconsolecontrols -fs -zoom ~/Pictures/30.gif
+
+# Enable touchpad tapping
+exec xinput set-prop 14 324 1
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
-for_window [title="gcolor2"] floating enable
+for_window [title="Pick"] floating enable
 for_window [instance="guake"] floating enable
 
 # Font
-font pango:Roboto 10
+font pango:Roboto 9
 
 #Remove window title
 for_window [class="^.*"] border pixel 0
@@ -19,7 +23,7 @@ for_window [class="^.*"] border pixel 0
 # Colors
 # class                 border  backgr. text    indicator
 client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
-client.urgent           #e74c3c #e74c3c #ffffff #90000
+client.urgent           #e74c3c #e74ca3c #ffffff #90000
 client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -33,6 +37,23 @@ bindsym $mod+Shift+q kill
 
 # start gmrun (a program launcher)
 bindsym $mod+space exec gmrun
+#bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 100 -padding 300 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
+
+# you need to bind some keys like volume and brightness
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+         # increase sound volume
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-       # decrease sound volume
+bindsym XF86AudioMute exec amixer -D pulse sset Master -- 0%                # mute sound
+
+bindsym XF86MonBrightnessUp exec light -A 5                                    # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5                                # decrease screen brightness
+
+# I use spotify as music player, so I had to setup play/pause keys too
+bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+# Print screen with shutter
+bindsym Print exec shutter -s
 
 # change focus
 bindsym $mod+b focus left
@@ -135,7 +156,7 @@ bindsym $mod+r mode "resize"
 
 bar {
     status_command i3status
-    font pango:Roboto Bold 9
+    font pango:Roboto Bold 8
 
     colors {
         background #2c3e50
@@ -148,3 +169,7 @@ bar {
         urgent_workspace   #e74c3c #e74c3c #ecf0f1
     }
 }
+
+#exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
+
+#exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
