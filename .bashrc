@@ -34,7 +34,7 @@ ulimit -c unlimited
 
 # General stuff
 export EMAIL='guerrinha@comum.org'
-export EDITOR="emacsc"
+export EDITOR="emacsclient -c"
 
 # PS1, yeah it's a big deal!
 red=$'\e[1;31;40m'
@@ -64,6 +64,7 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 # Load programming framework specific settings
 . $HOME/.bash.d/lang/nodejs
 . $HOME/.bash.d/lang/ruby
+. $HOME/.bash.d/lang/python
 
 # Instalacao das Funcoes ZZ (www.funcoeszz.net)
 export ZZOFF=""  # desligue funcoes indesejadas

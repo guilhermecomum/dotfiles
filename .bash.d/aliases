@@ -3,7 +3,9 @@
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -l'
 alias edit="emacsclient -t"
+alias sip='pick-colour-picker'
+alias brake='bundle exec rake'
 
-#OMS
-alias oms='cd $HOME/Projects/OMS/OEOMS/oms/oms_ui/src/main/ui'
-alias omsf='npm run clean-cache && npm run update-schema && npm run package && npm run serve'
+# Git
+alias pull='git pull'
+alias fetch='git fetch'
