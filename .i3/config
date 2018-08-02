@@ -2,10 +2,20 @@ set $mod Mod4
 
 # Autostar
 exec guake
-exec ~/bin/unsplash.sh
-#exec nitrogen --restore
-#exec mplayer -loop 0 -rootwin -ao null -noconsolecontrols -fs -zoom ~/Pictures/30.gif
-
+exec ~/bin/unsplash
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-backlight-helper
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-media-keys
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-power
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-sound
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id gnome-flashback
+exec nitrogen --restore
+#exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
+#exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
 # Enable touchpad tapping
 exec xinput set-prop 14 324 1
 
@@ -15,7 +25,7 @@ for_window [title="Pick"] floating enable
 for_window [instance="guake"] floating enable
 
 # Font
-font pango:Roboto 9
+font pango:Roboto 10
 
 #Remove window title
 for_window [class="^.*"] border pixel 0
@@ -38,7 +48,7 @@ bindsym $mod+Shift+q kill
 # start gmrun (a program launcher)
 bindsym $mod+space exec gmrun
 #bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 100 -padding 300 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
-
+bindsym $mod+Shift+l exec lock
 # you need to bind some keys like volume and brightness
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+         # increase sound volume
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-       # decrease sound volume
@@ -156,16 +166,16 @@ bindsym $mod+r mode "resize"
 
 bar {
     status_command i3status
-    font pango:Roboto Bold 8
+    font pango:Roboto Bold 10
 
     colors {
-        background #2c3e50
+        background #00233f
         statusline #ffffff
         separator #666666
 
-        active_workspace   #2c3e50 #2c3e50 #1abc9c
-        focused_workspace  #2c3e50 #2c3e50 #1abc9c
-        inactive_workspace #2c3e50 #2c3e50 #ecf0f1
+        active_workspace   #00233f #00233f #1899aa
+        focused_workspace  #00233f #00233f #1899aa
+        inactive_workspace #00233f #00233f #ecf0f1
         urgent_workspace   #e74c3c #e74c3c #ecf0f1
     }
 }
