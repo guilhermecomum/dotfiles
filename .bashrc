@@ -95,6 +95,13 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 . $HOME/.bash.d/lang/ruby
 . $HOME/.bash.d/lang/python
 
+# Plugins and apps
+# z- jump-list of the directories you actually use ( https://github.com/rupa/z )
+. ~/bin/z.sh
+
+# extract (https://github.com/alexrochas/zsh-extract)
+. ~/bin/extract.plugin.zsh
+
 # Instalacao das Funcoes ZZ (www.funcoeszz.net)
 export ZZOFF=""  # desligue funcoes indesejadas
 export ZZPATH="/usr/bin/funcoeszz"  # script
