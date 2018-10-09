@@ -14,6 +14,7 @@ exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec nitrogen --restore
+exec --no-startup-id ~/bin/tap-to-click.sh
 #exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
 #exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
 # Enable touchpad tapping
@@ -21,6 +22,7 @@ exec xinput set-prop 14 324 1
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
+for_window [title="gsimplecal"] floating enable move right 330px,move down 70px
 for_window [title="Pick"] floating enable
 for_window [instance="guake"] floating enable
 
@@ -165,9 +167,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-    status_command i3status
+    status_command py3status -c ~/.i3status.conf
     font pango:Roboto Bold 10
-
+    tray_output primary
     colors {
         background #00233f
         statusline #ffffff
