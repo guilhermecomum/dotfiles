@@ -1,30 +1,29 @@
 set $mod Mod4
 
 # Autostar
-exec guake
-exec ~/bin/unsplash
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-backlight-helper
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-media-keys
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-power
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-sound
-exec_always --no-startup-id gnome-power-manager
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id gnome-flashback
-exec nitrogen --restore
-exec --no-startup-id ~/bin/tap-to-click.sh
+# exec guake
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-backlight-helper
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-media-keys
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-power
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-sound
+#exec_always --no-startup-id gnome-power-manager
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id gnome-flashback
+#exec nitrogen --restore
 #exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
 #exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
-# Enable touchpad tapping
-exec xinput set-prop 14 324 1
+exec ~/bin/unsplash
+exec --no-startup-id ~/bin/tap-to-click.sh
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
 for_window [title="gsimplecal"] floating enable move right 330px,move down 70px
 for_window [title="Pick"] floating enable
 for_window [instance="guake"] floating enable
+for_window [class="Gnome-calculator"] floating enable, border normal
 
 # Font
 font pango:Roboto 10
@@ -49,26 +48,33 @@ bindsym $mod+Shift+q kill
 
 # start gmrun (a program launcher)
 bindsym $mod+space exec gmrun
-#bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 100 -padding 300 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
-bindsym $mod+Shift+l exec lock
-# you need to bind some keys like volume and brightness
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+         # increase sound volume
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-       # decrease sound volume
-bindsym XF86AudioMute exec amixer -D pulse sset Master -- 0%                # mute sound
 
-bindsym XF86MonBrightnessUp exec light -A 5                                    # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5                                # decrease screen brightness
+bindsym $mod+Shift+l exec "gnome-screensaver-command -l"
+
+#bindsym $mod+Shift+l exec lock
+
+#Media keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle # mute Mic
 
 # I use spotify as music player, so I had to setup play/pause keys too
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
+# Backlight
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+
+
 # Print screen with shutter
 bindsym Print exec shutter -s
 
 # change focus
-bindsym $mod+b focus left
+bindsym $mod+Shif+f focus left
 bindsym $mod+n focus down
 bindsym $mod+p focus up
 bindsym $mod+f focus right
@@ -83,7 +89,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+b move left
 bindsym $mod+Shift+n move down
 bindsym $mod+Shift+p move up
-bindsym $mod+Shift+f move right
+#bindsym $mod+Shift+f move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -101,9 +107,9 @@ bindsym $mod+v split v
 bindsym $mod+k fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -143,7 +149,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'gnome-session-quit --force --logout'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
