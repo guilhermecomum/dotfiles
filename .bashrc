@@ -18,7 +18,7 @@ shopt -s checkwinsize
 if [[ -z "$TMUX" ]] ;then
     ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
     if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session
+        tmux new-session -s trem
     else
         tmux attach-session -t "$ID" # if available attach to it
     fi
@@ -44,11 +44,12 @@ blu=$'\e[1;34;40m'
 mag=$'\e[1;35;40m'
 cyn=$'\e[1;36;40m'
 end=$'\e[0m'
+blink=$'\e[5;33;40m'
 
 # Since the venv name written in PS1 by the virtualenv's postactivate
 # script won't have colors, the original customized value is saved in
 # the variable `ORIG_PS1` and re-exported in the postactivate script.
-export ORIG_PS1="\[$red\]⚡ \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
+export ORIG_PS1="\[$red\]⚡\[$end\] \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
 export PS1=$ORIG_PS1
 
 

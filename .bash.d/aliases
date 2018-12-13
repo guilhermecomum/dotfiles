@@ -1,11 +1,14 @@
 # -*- Mode: shell-script; -*-
 
 alias ls='ls --color=auto --group-directories-first'
+alias sl='ls'
 alias ll='ls -l'
 alias edit="emacsclient -t"
 alias sip='pick-colour-picker'
 alias brake='bundle exec rake'
+alias hololo='convert'
 
 # Git
 alias pull='git pull'
 alias fetch='git fetch'
+alias status='git status'
