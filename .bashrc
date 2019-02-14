@@ -36,23 +36,6 @@ ulimit -c unlimited
 export EMAIL='guerrinha@comum.org'
 export EDITOR="emacsclient -c"
 
-# PS1, yeah it's a big deal!
-red=$'\e[1;31;40m'
-grn=$'\e[1;32;40m'
-yel=$'\e[1;33;40m'
-blu=$'\e[1;34;40m'
-mag=$'\e[1;35;40m'
-cyn=$'\e[1;36;40m'
-end=$'\e[0m'
-blink=$'\e[5;33;40m'
-
-# Since the venv name written in PS1 by the virtualenv's postactivate
-# script won't have colors, the original customized value is saved in
-# the variable `ORIG_PS1` and re-exported in the postactivate script.
-export ORIG_PS1="\[$red\]⚡\[$end\] \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
-export PS1=$ORIG_PS1
-
-
 # Randomize string (space-separated values).
 function randomize_string () {
   echo $@ | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);' | tr "\n" " "
@@ -69,6 +52,27 @@ function random_el () {
 function random_food () {
   echo $(random_el "🍺 🍸 🍹 🍷 🍕 🍔 🍟 🍗 🍖 🍝 🍤 🍣 🍥 🍜 🍡 🍞 🍩 🍦 🍨 🍰 🍪 🍫 🍬 🍭 🍎 🍏 🍊 🍋 🍒 🍇 🍉 🍓 🍑 🍌 🍐 🍍 🍆 🍅 🐶 🐱 🐭 🐹 🐰 🐻 🐼 🐨 🐯 🦁 🐮 🐷 🐸 🐵 🙈 🙉 🙊 🐔 🐧 🐦 🦊 🦄 🐝 🐙 🐠 🐡 🐳 ")
 }
+
+# Generate a random food emoji.
+function random_hearts () {
+  echo $(random_el "💙 🧡 💛 💚 💗")
+}
+
+# PS1, yeah it's a big deal!
+red=$'\e[1;31;40m'
+grn=$'\e[1;32;40m'
+yel=$'\e[1;33;40m'
+blu=$'\e[1;34;40m'
+mag=$'\e[1;35;40m'
+cyn=$'\e[1;36;40m'
+end=$'\e[0m'
+blink=$'\e[5;33;40m'
+
+# Since the venv name written in PS1 by the virtualenv's postactivate
+# script won't have colors, the original customized value is saved in
+# the variable `ORIG_PS1` and re-exported in the postactivate script.
+export ORIG_PS1="\[$red\]$(random_hearts)\[$end\] \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
+export PS1=$ORIG_PS1
 
 # Set tmux window status using food emoji as index.
 function tmux_food () {

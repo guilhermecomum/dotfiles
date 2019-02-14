@@ -8,7 +8,17 @@ alias sip='pick-colour-picker'
 alias brake='bundle exec rake'
 alias hololo='convert'
 
+alias sorte='fortune | cowsay | lolcat'
+
 # Git
 alias pull='git pull'
 alias fetch='git fetch'
 alias status='git status'
+
+#GNUcash
+alias cash='LANGUAGE=pt_BR.UTF-8 LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8 gnucash'
+
+# Python
+alias m='python $VIRTUAL_ENV/../manage.py'
+alias active='source `ls .*/bin/activate`'
+alias server='python -m http.server'
