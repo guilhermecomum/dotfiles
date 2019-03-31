@@ -26,5 +26,6 @@
   sync = !git pull && git push
   up = add -up
   undo-commit = reset --soft HEAD^
+  please=force-lease
 [hub]
   protocol = https
