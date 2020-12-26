@@ -8,6 +8,9 @@ export HISTSIZE=1000
 # Timestamps in history file
 export HISTTIMEFORMAT="%d/%m/%y %T "
 
+#disable left ctrl
+xmodmap -e "keycode 37="
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -86,13 +89,8 @@ tmux_food
 
 
 
-# Extend path with reasonable directories
-PATH="$HOME/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-export PATH
-
 # Load platform specific settings
-platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
+platform=$(uname 2>/dev/null | tr '[:upper:]' '[:lower:]')
 . $HOME/.bash.d/platform/$platform
 
 # Setup programming framework specific settings
@@ -102,6 +100,18 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 # z- jump-list of the directories you actually use ( https://github.com/rupa/z )
 . ~/bin/z.sh
 
+# Android setup
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+ANDROID_SDK_ROOT="$HOME/.android-tools"
+ANDROID_HOME="$HOME/.android-tools"
+JDK_HOME="$HOME/.sdkman/candidates/java/current"
+PATH=$PATH:$ANDROID_HOME/emulator
+PATH=$PATH:$ANDROID_HOME/tools
+PATH=$PATH:$ANDROID_HOME/tools/bin
+PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH
+
 # extract (https://github.com/alexrochas/zsh-extract)
 . ~/bin/extract.plugin.zsh
 
@@ -109,3 +119,7 @@ platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 export ZZOFF=""  # desligue funcoes indesejadas
 export ZZPATH="/usr/bin/funcoeszz"  # script
 source "$ZZPATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/guerra/.sdkman"
+[[ -s "/home/guerra/.sdkman/bin/sdkman-init.sh" ]] && source "/home/guerra/.sdkman/bin/sdkman-init.sh"

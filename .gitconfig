@@ -23,9 +23,14 @@
   default = current
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  update = !git pull upstream master
   sync = !git pull && git push
   up = add -up
   undo-commit = reset --soft HEAD^
   please=force-lease
+  ps = push -u
+  nb = checkout -b
 [hub]
   protocol = https
+[init]
+  defaultBranch = main

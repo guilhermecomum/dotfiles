@@ -4,21 +4,20 @@ alias ls='ls --color=auto --group-directories-first'
 alias sl='ls'
 alias ll='ls -l'
 alias edit="emacsclient -t"
-alias sip='pick-colour-picker'
-alias brake='bundle exec rake'
-alias hololo='convert'
-
 alias sorte='fortune | cowsay | lolcat'
+alias android='adb shell "while true; do screenrecord --output-format=h264 -; done" | ffplay -framerate 60 -probesize 32 -sync video -'
+alias n='npm'
+alias nr='npm run'
+alias p="ping 8.8.8.8 | lolcat"
 
 # Git
 alias pull='git pull'
 alias fetch='git fetch'
-alias status='git status'
+alias sts='git status'
 
-#GNUcash
-alias cash='LANGUAGE=pt_BR.UTF-8 LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8 gnucash'
 
 # Python
-alias m='python $VIRTUAL_ENV/../manage.py'
 alias active='source `ls .*/bin/activate`'
-alias server='python -m http.server 4242'
+alias server='python3 -m http.server'
+#alias tldr='tldr find'
+
