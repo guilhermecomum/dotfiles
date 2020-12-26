@@ -95,10 +95,8 @@ export PATH
 platform=$(uname 2>/dev/null | tr [A-Z] [a-z])
 . $HOME/.bash.d/platform/$platform
 
-# Load programming framework specific settings
-. $HOME/.bash.d/lang/nodejs
-. $HOME/.bash.d/lang/ruby
-. $HOME/.bash.d/lang/python
+# Setup programming framework specific settings
+. $HOME/.bash.d/asdf
 
 # Plugins and apps
 # z- jump-list of the directories you actually use ( https://github.com/rupa/z )

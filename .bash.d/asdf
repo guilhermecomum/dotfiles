@@ -1,0 +1,33 @@
+# -*- Mode: shell-script; -*-
+
+ASDF_ROOT="$HOME/.asdf"
+
+if [[ ! -d "$ASDF_ROOT" ]]; then
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    cd ~/.asdf
+    git checkout "$(git describe --abbrev=0 --tags)"
+fi
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+PLUGINS=$(asdf plugin-list)
+
+if ! echo $PLUGINS | grep -q nodejs; then
+    echo "Installing nodejs support..."
+    asdf plugin add nodejs
+    bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+    asdf install nodejs latest
+    echo -e "nodejs 14.15.3" >> $HOME/.tool-versions
+fi
+
+if ! echo $PLUGINS | grep -q golang; then
+    echo "Installing go support..."
+    asdf plugin add golang
+    asdf install golang latest
+    echo -e "golang 1.15.6" >> $HOME/.tool-versions
+fi
+
+export GOPATH=$(go env GOPATH)
+export PATH="$PATH:$(go env GOPATH)/bin"
+export GO111MODULE=on
