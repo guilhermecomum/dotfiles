@@ -1,26 +1,26 @@
 set $mod Mod4
 
 # Autostar
-# exec guake
-# exec --no-startup-id nm-applet
-# exec --no-startup-id blueman-applet
-# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-backlight-helper
-# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-media-keys
-# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-power
-# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-sound
-#exec_always --no-startup-id gnome-power-manager
-#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id gnome-flashback
-#exec nitrogen --restore
-#exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
-#exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
+exec setxkbmap -option caps:ctrl_modifier
+exec guake
+exec --no-startup-id nm-applet
+exec --no-startup-id /usr/libexec/gsd-xsettings
+exec --no-startup-id /usr/libexec/gsd-media-keys
+exec --no-startup-id /usr/libexec/gsd-sound
+exec --no-startup-id /usr/libexec/gsd-power
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id gnome-flashback
 exec ~/bin/unsplash
-exec --no-startup-id ~/bin/tap-to-click.sh
+exec nitrogen --restore
+exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
+#exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
+exec --no-startup-id "compton -b --config ~/.i3/compton.conf"
+#exec autolux --xrandr eDP-1 --daemon
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
-for_window [title="gsimplecal"] floating enable move right 330px,move down 70px
+for_window [title="gsimplecal"] floating enable move right 500px,move down 10px
 for_window [title="Pick"] floating enable
 for_window [instance="guake"] floating enable
 for_window [class="Gnome-calculator"] floating enable, border normal
@@ -34,7 +34,7 @@ for_window [class="^.*"] border pixel 0
 # Colors
 # class                 border  backgr. text    indicator
 client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
-client.urgent           #e74c3c #e74ca3c #ffffff #90000
+#client.urgent           #e74c3c #e74ca3c #ffffff #90000
 client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -54,20 +54,25 @@ bindsym $mod+Shift+l exec "gnome-screensaver-command -l"
 #bindsym $mod+Shift+l exec lock
 
 #Media keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle # mute Mic
+# bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'
+# bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'
+# bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle # mute Mic
 
 # I use spotify as music player, so I had to setup play/pause keys too
-bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+# bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+# bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+# bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 # Backlight
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
+# External Monitor
+#bindsym $mod+Shif+m exec "xrandr --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal"
 
 
 # Print screen with shutter
@@ -89,7 +94,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+b move left
 bindsym $mod+Shift+n move down
 bindsym $mod+Shift+p move up
-#bindsym $mod+Shift+f move right
+bindsym $mod+Shift+f move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -149,8 +154,9 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'gnome-session-quit --force --logout'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'gnome-session-quit --force --logout'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -178,13 +184,15 @@ bar {
     font pango:Roboto Bold 10
     tray_output primary
     colors {
-        background #00233f
-        statusline #ffffff
+        background #00233F
+        #background #00233f
+        #statusline #91F8F9
+        #statusline #ffffff
         separator #666666
 
-        active_workspace   #00233f #00233f #1899aa
-        focused_workspace  #00233f #00233f #1899aa
-        inactive_workspace #00233f #00233f #ecf0f1
+        active_workspace   #91F8F9 #00233F #91F8F9
+        focused_workspace  #00233F #00233F #91F8F9
+        inactive_workspace #00233F #00233F #ecf0f1
         urgent_workspace   #e74c3c #e74c3c #ecf0f1
     }
 }
