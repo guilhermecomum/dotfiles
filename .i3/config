@@ -11,9 +11,10 @@ exec --no-startup-id /usr/libexec/gsd-power
 exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
-exec ~/bin/unsplash
+#exec ~/bin/unsplash
 exec nitrogen --restore
-exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
+#exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
+exec nitrogen --set-scaled ~/Pictures/IMG_20190817_203950.jpg
 #exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
 exec --no-startup-id "compton -b --config ~/.i3/compton.conf"
 #exec autolux --xrandr eDP-1 --daemon
