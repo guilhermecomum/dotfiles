@@ -18,14 +18,14 @@ if ! echo $PLUGINS | grep -q nodejs; then
     asdf plugin add nodejs
     bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
     asdf install nodejs latest
-    echo -e "nodejs 14.15.3" >> $HOME/.tool-versions
+    echo -e nodejs $(asdf latest nodejs) >> $HOME/.tool-versions
 fi
 
 if ! echo $PLUGINS | grep -q golang; then
     echo "Installing go support..."
     asdf plugin add golang
     asdf install golang latest
-    echo -e "golang 1.15.6" >> $HOME/.tool-versions
+    echo -e golang $(asdf latest golang) >> $HOME/.tool-versions
 fi
 
 export GOPATH=$(go env GOPATH)
