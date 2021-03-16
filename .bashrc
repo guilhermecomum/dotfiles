@@ -71,6 +71,10 @@ cyn=$'\e[1;36;40m'
 end=$'\e[0m'
 blink=$'\e[5;33;40m'
 
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+         . /usr/share/git/completion/git-prompt.sh
+fi
+
 # Since the venv name written in PS1 by the virtualenv's postactivate
 # script won't have colors, the original customized value is saved in
 # the variable `ORIG_PS1` and re-exported in the postactivate script.
@@ -86,8 +90,6 @@ function tmux_food () {
   fi
 }
 tmux_food
-
-
 
 # Load platform specific settings
 platform=$(uname 2>/dev/null | tr '[:upper:]' '[:lower:]')
