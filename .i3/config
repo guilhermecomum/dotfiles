@@ -12,12 +12,10 @@ exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec ~/bin/unsplash
-#exec nitrogen --restore
 #exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
-#exec nitrogen --set-scaled ~/Pictures/IMG_20190817_203950.jpg
 #exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
 exec --no-startup-id "compton -b --config ~/.i3/compton.conf"
-#exec autolux --xrandr eDP-1 --daemon
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Make windows floating
 for_window [class="Gmrun"] floating enable
@@ -179,25 +177,3 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-bar {
-    status_command py3status -c ~/.i3status.conf
-    font pango:Roboto Bold 10
-    tray_output primary
-    colors {
-        background #00233F
-        #background #00233f
-        #statusline #91F8F9
-        #statusline #ffffff
-        separator #666666
-
-        active_workspace   #91F8F9 #00233F #91F8F9
-        focused_workspace  #00233F #00233F #91F8F9
-        inactive_workspace #00233F #00233F #ecf0f1
-        urgent_workspace   #e74c3c #e74c3c #ecf0f1
-    }
-}
-
-#exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
-
-#exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
