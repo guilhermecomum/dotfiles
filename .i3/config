@@ -31,10 +31,27 @@ font pango:Roboto 10
 for_window [class="^.*"] border pixel 0
 
 # Colors
-# class                 border  backgr. text    indicator
-client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
-#client.urgent           #e74c3c #e74ca3c #ffffff #90000
-client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #ffffff
+set_from_resource $bg i3wm.color1 #1abc9c
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $fg     $fg     $bg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
+# # class                 border  backgr. text    indicator
+# client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
+# #client.urgent           #e74c3c #e74ca3c #ffffff #90000
+# client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -51,28 +68,6 @@ bindsym $mod+space exec gmrun
 bindsym $mod+Shift+l exec "gnome-screensaver-command -l"
 
 #bindsym $mod+Shift+l exec lock
-
-#Media keys
-# bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'
-# bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'
-# bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-# bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle # mute Mic
-
-# I use spotify as music player, so I had to setup play/pause keys too
-# bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-# bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-# bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-
-# Backlight
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-
-# External Monitor
-#bindsym $mod+Shif+m exec "xrandr --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal"
-
 
 # Print screen with shutter
 bindsym Print exec shutter -s
@@ -111,9 +106,9 @@ bindsym $mod+v split v
 bindsym $mod+k fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+Shift+w layout tabbed
-# bindsym $mod+e layout toggle split
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -154,8 +149,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'gnome-session-quit --force --logout'"
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'gnome-session-quit --force --logout'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
