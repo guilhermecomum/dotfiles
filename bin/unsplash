@@ -2,4 +2,8 @@
 file=$(mktemp /tmp/wallpaper.XXX.jpg)
 wget -O $file https://unsplash.it/1920/1080/?random
 nitrogen --set-scaled $file
-wal -i $file
+if [[ -z "$1" ]]; then
+  wal -i $file
+else
+  wal -i $file -l
+fi

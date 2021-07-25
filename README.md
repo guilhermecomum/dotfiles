@@ -26,3 +26,6 @@ If you don't trust my script, you can just copy the files that you want
 to your home folder or symlink them.
 
 This repo is a fork from my dear friend [Lincoln Clarete](https://github.com/clarete/dotfiles) dotfiles
+
+polybarwal
+.cache/wal/colors.Xresource

@@ -170,3 +170,46 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# Colors
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #ffffff
+set_from_resource $bg i3wm.color0 #1abc9c
+set_from_resource $urgente_bg i3wm.color0
+set_from_resource $urgent_fg i3wm.color6
+set_from_resource $active i3wm.color1
+set_from_resource $inactive i3wm.color8
+
+# # class                 border  backgr. text indicator child_border
+# client.focused          $bg     $bg     $fg  $bg       $bg
+# client.focused_inactive $bg     $bg     $fg  $bg       $bg
+# client.unfocused        $fg     $fg     $bg  $bg       $bg
+# client.urgent           $bg     $bg     $fg  $bg       $bg
+# client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+# client.background       $bg
+
+# # # class                 border  backgr. text    indicator
+# # client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
+# # #client.urgent           #e74c3c #e74ca3c #ffffff #90000
+# # client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
+
+bar {
+    status_command py3status -c ~/.i3status.conf
+    font pango:Roboto Bold 10
+    tray_output primary
+    colors {
+        background $bg
+        statusline $fg
+        separator $fg
+
+        active_workspace   $bg $bg $active $fg
+        focused_workspace  $bg $bg $active $fg
+        inactive_workspace $bg $bg $inactive $fg
+        urgent_workspace   $urgent_bg $urgent_bg $urgent_fg
+    }
+}
