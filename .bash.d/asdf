@@ -28,6 +28,13 @@ if ! echo $PLUGINS | grep -q golang; then
     echo -e golang $(asdf latest golang) >> $HOME/.tool-versions
 fi
 
+if ! echo $PLUGINS | grep -q ruby; then
+    echo "Installing ruby support..."
+    asdf plugin add ruby
+    asdf install ruby latest
+    echo -e ruby $(asdf latest ruby) >> $HOME/.tool-versions
+fi
+
 export GOPATH=$(go env GOPATH)
 export PATH="$PATH:$(go env GOPATH)/bin"
 export GO111MODULE=on

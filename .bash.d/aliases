@@ -9,15 +9,32 @@ alias android='adb shell "while true; do screenrecord --output-format=h264 -; do
 alias n='npm'
 alias nr='npm run'
 alias p="ping 8.8.8.8 | lolcat"
+alias suspend='systemctl suspend'
 
 # Git
 alias pull='git pull'
 alias fetch='git fetch'
 alias sts='git status'
 
-
 # Python
 alias active='source `ls .*/bin/activate`'
 alias server='python3 -m http.server'
 #alias tldr='tldr find'
 
+alias juntos='pacmd load-module module-combine-sink sink_name=combined sink_properties=device.description=CombinedSink slaves=alsa_output.pci-0000_00_1f.3.analog-stereo,bluez_sink.E8_EC_A3_B0_01_87.a2dp_sink'
+alias alone='pacmd unload-module module-combine-sink'
+
+#Ruby
+alias b='bundle'
+alias be='bundle exec'
+
+#Docker
+alias dbserver='docker run -it --rm -e POSTGRES_PASSWORD='pass' -e PGDATA=/var/lib/postgresql/data/pgdata -v /home/guerra/.docker/postgres/data:/var/lib/postgresql/data -p 5432:5432 --network postgres --name postgres postgres'
+alias rediss='docker run -it --rm -p 6379:6379 --name redis redis'
+alias influxdb='docker run -it --rm -e DOCKER_INFLUXDB_INIT_MODE='setup' -e DOCKER_INFLUXDB_INIT_USERNAME=admin -e DOCKER_INFLUXDB_INIT_PASSWORD='password123' -e DOCKER_INFLUXDB_INIT_ORG='myorg' -e DOCKER_INFLUXDB_INIT_BUCKET='balde' -v /home/guerra/.docker/influxdb/data:/var/lib/influxdb -p 8086:8086 --network influxdb --name influxdb influxdb'
+
+#Org
+alias sorg='cd ~/Projects/org-files/ && git push origin main'
+
+#ledger
+alias led='ledger -f ~/Projects/ledger/2021.dat'
