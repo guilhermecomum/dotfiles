@@ -162,23 +162,22 @@ set_from_resource $active i3wm.color1
 set_from_resource $inactive i3wm.color8
 
 # # class                 border  backgr. text indicator child_border
-# client.focused          $bg     $bg     $fg  $bg       $bg
-# client.focused_inactive $bg     $bg     $fg  $bg       $bg
-# client.unfocused        $fg     $fg     $bg  $bg       $bg
-# client.urgent           $bg     $bg     $fg  $bg       $bg
-# client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $fg     $fg     $bg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
 
-# client.background       $bg
+client.background       $bg
 
 # # # class                 border  backgr. text    indicator
-# # client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
-# # #client.urgent           #e74c3c #e74ca3c #ffffff #90000
-# # client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
+# client.focused          #1abc9c #1abc9c #ffffff #2e9ef4
+# client.urgent           #e74c3c #e74ca3c #ffffff #90000
+# client.unfocused        #2c3e50 #2c3e50 #8a8a8a #2e9ef4
 
 bar {
     status_command py3status -c ~/.i3status.conf
     font pango:Roboto Bold 10
-    tray_output primary
     colors {
         background $bg
         statusline $fg
