@@ -2,16 +2,24 @@
 file=$(mktemp /tmp/wallpaper.XXX.jpg)
 wget -O $file https://unsplash.it/1920/1080/?random
 nitrogen --set-scaled $file
+index=0
+plus=10
 if [[ -z "$1" ]]; then
   wal -i $file
-  #i3 restart
-  hex=`sed "1q;d" ~/.cache/wal/colors | sed 's/#//g'`
-  rgb=`printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}`
-  magic-home color 192.168.15.128 $rgb 255
+  i3 restart
+  for i in $(cat ~/.cache/wal/colors ); do
+      #hex=`sed "1q;d" ~/.cache/wal/colors | sed 's/#//g'`
+      hex=`echo $i | sed -e 's/#//g'`
+      rgb=`printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}`
+      #echo $index
+      #magic-home color 192.168.15.128 $rgb
+      echo magic-home color 192.168.15.128 $rgb 100 | at now + $index minute
+      index=$((index+plus))
+  done
 else
   wal -i $file -l
   #i3 restart
   hex=`sed "2q;d" ~/.cache/wal/colors | sed 's/#//g'`
   rgb=`printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}`
-  magic-home color 192.168.15.128 $rgb 255
+  magic-home color 192.168.15.128 $rgb
 fi
