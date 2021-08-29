@@ -42,7 +42,10 @@ bindsym $mod+Shift+q kill
 # start gmrun (a program launcher)
 bindsym $mod+space exec gmrun
 
+bindsym $mod+F12 exec gnome-control-center
+
 bindsym $mod+Shift+l exec "gnome-screensaver-command -l"
+bindsym $mod+F7 exec toggle-keyboard
 
 #bindsym $mod+Shift+l exec lock
 

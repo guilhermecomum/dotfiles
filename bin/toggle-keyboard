@@ -1,0 +1,9 @@
+# -*- shell-script -*-
+#/bin/bash
+keyboard_layout=$(setxkbmap -query | sed '3q;d' | awk -F: '{print $2}' | xargs)
+if [ $keyboard_layout = "us" ]
+then
+    setxkbmap -model abnt2 -layout br
+else
+    setxkbmap -layout us -variant mac
+fi
