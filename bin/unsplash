@@ -1,3 +1,4 @@
+# -*- shell-script -*-
 #/bin/bash
 for i in `atq | awk '{print $1}'`;do atrm $i;done
 file=$(mktemp /tmp/wallpaper.XXX.jpg)
@@ -14,6 +15,8 @@ if [[ -z "$1" ]]; then
       echo magic-home color 192.168.15.128 $rgb 100 | at now + $index minute
       index=$((index+plus))
   done
+  index=$((index+plus))
+  echo unsplash | at now + $index minute
 else
   wal -i $file -l
   i3 restart
