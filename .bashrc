@@ -19,11 +19,11 @@ shopt -s histappend
 shopt -s checkwinsize
 
 if [[ -z "$TMUX" ]] ;then
-    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-    if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session -s trem
+    SESSION="`tmux ls | wc -l`"
+    if [[ "$SESSION" -ge 1 ]] ;then # if not available create a new one
+        tmux attach
     else
-        tmux attach-session -t "$ID" # if available attach to it
+        tmux new
     fi
 fi
 
