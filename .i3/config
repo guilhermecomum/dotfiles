@@ -2,21 +2,20 @@ set $mod Mod4
 
 # Autostar
 exec setxkbmap -option caps:ctrl_modifier
-exec guake
-exec --no-startup-id nm-applet
 exec --no-startup-id /usr/libexec/gsd-xsettings
 exec --no-startup-id /usr/libexec/gsd-media-keys
 exec --no-startup-id /usr/libexec/gsd-sound
 exec --no-startup-id /usr/libexec/gsd-power
-exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet
 exec --no-startup-id gnome-flashback
-exec ~/bin/unsplash
+#exec ~/bin/unsplash
+exec guake
 #exec nitrogen --set-scaled ~/Pictures/Animated/01.gif
 #exec mplayer -loop 0 -rootwin -fixed-vo -ao null -noconsolecontrols -fs -zoom ~/Pictures/Animated/01.gif
 #exec --no-startup-id "compton -b --config ~/.i3/compton.conf"
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 # Make windows floating
 for_window [class="Gmrun"] floating enable
 for_window [title="gsimplecal"] floating enable move right 500px,move down 10px
