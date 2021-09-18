@@ -1,6 +1,7 @@
 # -*- shell-script -*-
 #/bin/bash
 for i in `atq | awk '{print $1}'`;do atrm $i;done
+battery_status=`cat /sys/class/power_supply/BAT0/status`
 file=$(mktemp /tmp/wallpaper.XXX.jpg)
 wget -O $file https://unsplash.it/1920/1080/?random
 nitrogen --set-scaled $file
@@ -9,14 +10,16 @@ plus=10
 if [[ -z "$1" ]]; then
   wal -i $file
   i3 restart
-  for i in $(cat ~/.cache/wal/colors ); do
-      hex=`echo $i | sed -e 's/#//g'`
-      rgb=`printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}`
-      echo magic-home color 192.168.15.128 $rgb 100 | at now + $index minute
-      index=$((index+plus))
-  done
-  index=$((index+plus))
-  echo unsplash | at now + $index minute
+  if [ $battery_status = 'Charging' ]; then
+     for i in $(cat ~/.cache/wal/colors ); do
+         hex=`echo $i | sed -e 's/#//g'`
+         rgb=`printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}`
+         echo magic-home color 192.168.15.128 $rgb 100 | at now + $index minute
+         index=$((index+plus))
+     done
+     #  index=$((index+plus))
+     #echo unsplash | at now + $index minute
+  fi
 else
   wal -i $file -l
   i3 restart
