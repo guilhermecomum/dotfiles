@@ -8,6 +8,9 @@ export HISTSIZE=1000
 # Timestamps in history file
 export HISTTIMEFORMAT="%d/%m/%y %T "
 
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 #disable left ctrl
 xmodmap -e "keycode 37="
 
