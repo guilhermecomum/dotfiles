@@ -34,3 +34,5 @@
   protocol = https
 [init]
   defaultBranch = main
+[diff]
+	external = difft

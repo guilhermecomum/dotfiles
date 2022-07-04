@@ -120,6 +120,9 @@ export PATH
 # extract (https://github.com/alexrochas/zsh-extract)
 . ~/bin/extract.plugin.zsh
 
+# Cask
+export PATH="/home/guerra/.cask/bin:$PATH"
+
 # Instalacao das Funcoes ZZ (www.funcoeszz.net)
 export ZZOFF=""  # desligue funcoes indesejadas
 export ZZPATH="/usr/bin/funcoeszz"  # script
@@ -128,3 +131,12 @@ source "$ZZPATH"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/guerra/.sdkman"
 [[ -s "/home/guerra/.sdkman/bin/sdkman-init.sh" ]] && source "/home/guerra/.sdkman/bin/sdkman-init.sh"
+
+# ADB Autocomplete
+if [ -e ~/.local/bin/adb.txt ] ; then
+    source ~/.local/bin/adb.txt
+fi
+
+# direnv
+eval "$(direnv hook bash)"
+. "$HOME/.cargo/env"

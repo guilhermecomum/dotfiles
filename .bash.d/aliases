@@ -10,6 +10,8 @@ alias n='npm'
 alias nr='npm run'
 alias p="ping 8.8.8.8 | lolcat"
 alias suspend='systemctl suspend'
+alias cat='batcat'
+alias dc='docker-compose'
 
 # Git
 alias pull='git pull'
@@ -33,12 +35,20 @@ alias b='bundle'
 alias be='bundle exec'
 
 #Docker
-alias dbserver='docker run -it --rm -e POSTGRES_PASSWORD='pass' -e PGDATA=/var/lib/postgresql/data/pgdata -v $HOME/.docker/postgres/data:/var/lib/postgresql/data -p 5432:5432 --network postgres --name postgres postgres:12.8'
+alias dbserver='docker run -it --rm -e POSTGRES_PASSWORD='pass' -e PGDATA=/var/lib/postgresql/data/pgdata -v /home/guerra/.docker/postgres/data:/var/lib/postgresql/data -p 5432:5432 --name dbserver postgres:12.8'
 alias rediss='docker run -it --rm -p 6379:6379 --name redis redis'
 alias influxdb='docker run -it --rm -e DOCKER_INFLUXDB_INIT_MODE='setup' -e DOCKER_INFLUXDB_INIT_USERNAME=admin -e DOCKER_INFLUXDB_INIT_PASSWORD='password123' -e DOCKER_INFLUXDB_INIT_ORG='myorg' -e DOCKER_INFLUXDB_INIT_BUCKET='balde' -v /home/guerra/.docker/influxdb/data:/var/lib/influxdb -p 8086:8086 --network influxdb --name influxdb influxdb'
-
+alias dr='docker-compose run'
+alias lang='docker run --rm -it -p 8010:8010 -e langtool_languageModel=/ngrams -v /home/guerra/.ngrams:/ngrams erikvl87/languagetool'
 #Org
 alias sorg='cd ~/Projects/org-files/ && git push origin main'
 
 #ledger
 alias led='ledger -f ~/Projects/ledger/2021.dat'
+
+###
+alias shapi='docker-compose run api /bin/bash'
+alias dip='docker-compose exec api'
+
+alias dev='emacs-28.0.92 -Q --script publish.el'
+alias prod='ENV=prod emacs-28.0.92 -Q --script publish.el'
