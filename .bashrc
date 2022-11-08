@@ -1,6 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
+export PATH=$PATH:$HOME/bin
 # force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
 export HISTSIZE=1000
@@ -84,6 +84,8 @@ fi
 export ORIG_PS1="\[$red\]$(random_hearts)\[$end\] \[$blu\]\W \[$yel\]\$(__git_ps1 \"%s \")\[$grn\]$ \[$end\]"
 export PS1=$ORIG_PS1
 
+force_color_prompt=yes
+
 # Set tmux window status using food emoji as index.
 function tmux_food () {
   if [[ "$TERM" = screen* ]] && [ -n "$TMUX" ]; then
@@ -106,16 +108,11 @@ platform=$(uname 2>/dev/null | tr '[:upper:]' '[:lower:]')
 . ~/bin/z.sh
 
 # Android setup
-PATH="$HOME/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-ANDROID_SDK_ROOT="$HOME/.android-tools"
-ANDROID_HOME="$HOME/.android-tools"
-JDK_HOME="$HOME/.sdkman/candidates/java/current"
-PATH=$PATH:$ANDROID_HOME/emulator
-PATH=$PATH:$ANDROID_HOME/tools
-PATH=$PATH:$ANDROID_HOME/tools/bin
-PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH
+export ANDROID_HOME=$HOME/.android
+export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
+export PATH=$ANDROID_HOME/emulator/:$PATH
+export PATH=$ANDROID_HOME/platform-tools/:$PATH
+export ANDROID_SDK_ROOT="$HOME/.android"
 
 # extract (https://github.com/alexrochas/zsh-extract)
 . ~/bin/extract.plugin.zsh
@@ -123,20 +120,7 @@ export PATH
 # Cask
 export PATH="/home/guerra/.cask/bin:$PATH"
 
-# Instalacao das Funcoes ZZ (www.funcoeszz.net)
-export ZZOFF=""  # desligue funcoes indesejadas
-export ZZPATH="/usr/bin/funcoeszz"  # script
-source "$ZZPATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/guerra/.sdkman"
-[[ -s "/home/guerra/.sdkman/bin/sdkman-init.sh" ]] && source "/home/guerra/.sdkman/bin/sdkman-init.sh"
-
 # ADB Autocomplete
 if [ -e ~/.local/bin/adb.txt ] ; then
     source ~/.local/bin/adb.txt
 fi
-
-# direnv
-eval "$(direnv hook bash)"
-. "$HOME/.cargo/env"
