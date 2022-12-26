@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Copyright 2022 Renato Byrro
+
+# Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# This script is licensed under a 3-clause BSD License (ref.: LICENSE attached)
+# License: https://opensource.org/licenses/BSD-3-Clause
+
+# Nicer RGB format for gdbus color picker response
+# Tested on Ubuntu 22.04 using Wayland desktop
+# This is one of my first Bash scripts. Please pardon my noobiness. Just needed the job done.
+# Dependencies: bc
+
+# Original code from: https://gist.github.com/byrro/7a74e54f63667bbb066fa309208a6cba
+
+# Get the gdbus output with colors as floats
+response=$(gdbus call --session --dest org.gnome.Shell.Screenshot --object-path /org/gnome/Shell/Screenshot --method org.gnome.Shell.Screenshot.PickColor)
+
+# Clean up the gdbus output
+colors=${response/"({'color': <("/""}
+colors=${colors/")>},)"/""}
+
+# Split colors to an array
+IFS=',' read -ra colors <<< "$colors"
+
+# Convert to 255-based RGB format (float)
+red=$(echo "${colors[0]} * 255" | bc)
+green=$(echo "${colors[1]} * 255" | bc)
+blue=$(echo "${colors[2]} * 255" | bc)
+
+# 255-based RGB format (integer)
+red=${red%%.*}
+green=${green%%.*}
+blue=${blue%%.*}
+
+result=$(printf 'HEX: #%02x%02x%02x\n' "$red" "$green" "$blue")
+zenity --info --title="Captured color" --text="${result}"
