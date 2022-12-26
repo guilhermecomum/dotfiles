@@ -36,3 +36,5 @@
   defaultBranch = main
 [diff]
 	external = difft
+[pull]
+	rebase = true
